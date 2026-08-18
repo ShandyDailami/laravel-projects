@@ -1,0 +1,31 @@
+# Environment & Sensitive files
+**/.env
+**/.env.backup
+**/.env.production
+
+# Dependencies
+**/vendor/
+**/node_modules/
+
+# Laravel Storage & Logs
+**/storage/*.key
+**/storage/framework/cache/data/*
+**/storage/framework/sessions/*
+**/storage/framework/views/*
+**/storage/logs/*
+!**/storage/framework/cache/.gitignore
+!**/storage/framework/sessions/.gitignore
+!**/storage/framework/views/.gitignore
+!**/storage/logs/.gitignore
+
+# Frontend Build
+**/public/hot
+**/public/storage
+**/public/build/
+**/dist/
+
+# OS / Editor files
+.DS_Store
+Thumbs.db
+**/.idea/
+**/.vscode/
