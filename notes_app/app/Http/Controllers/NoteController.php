@@ -122,7 +122,7 @@ class NoteController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'Successfully update data',
+            'message' => 'Successfully updated data',
             'data' => $updateNote
         ]);
     }
