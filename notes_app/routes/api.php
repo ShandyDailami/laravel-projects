@@ -25,6 +25,7 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/notes/{id}', 'update')->name('api.notes.update');
         Route::get('/notes/{id}', 'show')->name('api.notes.show');
         Route::delete('/notes/{id}', 'destroy')->name('api.notes.delete');
+        Route::patch('/notes/{id}/pin', 'togglePin')->name('api.notes.togglePin');
     });
 
     Route::controller(TagController::class)->group(function () {

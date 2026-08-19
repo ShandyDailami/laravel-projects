@@ -178,4 +178,28 @@ class NoteController extends Controller
             'message' => 'Data successfully deleted'
         ], 200);
     }
+
+    public function togglePin(Request $request, string $id)
+    {
+        $note = DB::selectOne("
+            UPDATE notes
+            SET
+                is_pinned = NOT is_pinned,
+                updated_at = NOW()
+            WHERE id = ? AND user_id = ?
+            RETURNING id, title, is_pinned, updated_at
+        ", [$id, auth('api')->id()]);
+
+        if (!$note) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Data not found',
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'data' => $note
+        ], 200);
+    }
 }
