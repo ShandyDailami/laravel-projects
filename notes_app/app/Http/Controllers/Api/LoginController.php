@@ -20,7 +20,7 @@ class LoginController extends Controller
         ]);
 
         // if validation fails
-        if($validator->fails()) {
+        if ($validator->fails()) {
             return response()->json($validator->errors(), 422);
         }
 
@@ -28,7 +28,7 @@ class LoginController extends Controller
         $credentials = $request->only('email', 'password');
 
         // if auth failed
-        if(!$token = auth()->guard('api')->attempt($credentials)) {
+        if (!$token = auth()->guard('api')->attempt($credentials)) {
             return response()->json([
                 'success' => false,
                 'message' => 'Wrong Email or Password'
