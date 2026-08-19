@@ -18,7 +18,7 @@ Koleksi dan showcase backend API / aplikasi web yang dibangun menggunakan ekosis
 RESTful API backend untuk manajemen catatan pribadi yang aman dan terisolasi per user. Dibangun dengan pendekatan **Raw SQL Optimization** di PostgreSQL untuk performa kueri atomik dan bebas *race conditions*.
 
 ### 🛠️ Tech Stack & Key Features
-- **Framework:** Laravel 11 (PHP 8.2+)
+- **Framework:** Laravel 13 (PHP 8.4+)
 - **Database:** PostgreSQL (UUID v4 Primary Keys)
 - **Authentication:** Stateless JWT (`php-open-source-saver/jwt-auth`)
 - **Query Strategy:** Parameterized Raw SQL (`DB::selectOne`, `DB::delete`, `RETURNING` clauses)
