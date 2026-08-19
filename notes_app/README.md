@@ -1,39 +1,30 @@
-# 🚀 Laravel Projects Monorepo / Collection
+# 📝 Notes App REST API
 
-Koleksi dan showcase backend API / aplikasi web yang dibangun menggunakan ekosistem **Laravel**, **PostgreSQL**, dan **RESTful API Architecture**.
-
----
-
-## 📌 Daftar Project
-
-| # | Project Name | Tech Stack | Status | Deskripsi Singkat |
-|---|---|---|---|---|
-| 1 | **Notes API** | Laravel 11, PostgreSQL, JWT Auth, Raw SQL | 🟢 Completed | REST API manajemen catatan pribadi (BREAD), proteksi JWT, UUID primary keys, dan PostgreSQL atomic queries. |
-| 2 | *Next Project...* | - | 🟡 Planned | - |
+Backend RESTful API untuk aplikasi manajemen catatan pribadi yang aman, dan terisolasi per user. Dibangun menggunakan **Laravel**, **PostgreSQL**, **JWT Authentication**, dan pendekatan kueri **Raw SQL**.
 
 ---
 
-## 📝 Project Showcase #1: Notes REST API
+## 🛠️ Tech Stack & Architecture
 
-RESTful API backend untuk manajemen catatan pribadi yang aman dan terisolasi per user. Dibangun dengan pendekatan **Raw SQL Optimization** di PostgreSQL untuk performa kueri atomik dan bebas *race conditions*.
-
-### 🛠️ Tech Stack & Key Features
-- **Framework:** Laravel 13 (PHP 8.4+)
-- **Database:** PostgreSQL (UUID v4 Primary Keys)
-- **Authentication:** Stateless JWT (`php-open-source-saver/jwt-auth`)
-- **Query Strategy:** Parameterized Raw SQL (`DB::selectOne`, `DB::delete`, `RETURNING` clauses)
-- **Features:**
-  - 🔐 Auth: Register, Login, Me, Refresh Token, Logout.
-  - 📄 BREAD Notes: Browse (Search & Pin Sort), Read, Edit (Atomic Update), Add, Delete.
-  - 🏷️ Tagging System: Many-to-Many relationship (PostgreSQL `JSON_AGG`).
-  - ⚡ Full-Text Search: Case-insensitive search menggunakan PostgreSQL `ILIKE`.
+* **Framework:** Laravel 13 (PHP 8.4+)
+* **Database:** PostgreSQL (UUID v4 Primary Keys)
+* **Authentication:** Stateless JWT Auth (`php-open-source-saver/jwt-auth`)
+* **Query Engine:** Parameterized Raw SQL (`DB::select`, `DB::selectOne`, `DB::delete` dengan PostgreSQL `RETURNING` clauses)
+* **API Style:** RESTful JSON Envelope Standard
 
 ---
 
-### 🚀 Cara Menjalankan Project (Local Setup)
+## ✨ Fitur Utama
 
-#### 1. Clone & Install Dependencies
-```bash
-git clone [https://github.com/username-anda/nama-repo.git](https://github.com/username-anda/nama-repo.git)
-cd nama-repo
-composer install
+* 🔐 **Autentikasi Stateless JWT**: Register, Login, User Profile, dan Token Invalidation (Logout).
+* 📄 **BREAD Operations**:
+  * **Browse**: Mengambil daftar semua catatan terurut berdasarkan status pin dan waktu pembuatan terbaru.
+  * **Read**: Mengambil detail catatan spesifik beserta relasi tags.
+  * **Edit / Update**: Pembaruan catatan secara atomik langsung dengan klausul PostgreSQL `RETURNING`.
+  * **Add / Store**: Pembuatan catatan baru dengan verifikasi otorisasi pemilik.
+  * **Delete**: Penghapusan catatan aman berbasis *affected rows*.
+* 🔍 **Full-Text Case-Insensitive Search**: Pencarian catatan berdasarkan judul atau konten menggunakan operator PostgreSQL `ILIKE`.
+* 🏷️ **Many-to-Many Tagging System**: Manajemen tag catatan menggunakan tabel pivot `note_tags` yang di-agregasi menggunakan fungsi PostgreSQL `JSON_AGG`.
+* 🛡️ **Data Security**: Proteksi penuh terhadap SQL Injection via *parameterized queries* dan isolasi ketat kepemilikan catatan berdasarkan `user_id`.
+
+---
