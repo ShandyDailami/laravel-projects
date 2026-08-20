@@ -3,6 +3,7 @@
 use App\Http\Controllers\Api\LoginController;
 use App\Http\Controllers\Api\RegisterController;
 use App\Http\Controllers\NoteController;
+use App\Http\Controllers\NoteTagsController;
 use App\Http\Controllers\TagController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -34,6 +35,14 @@ Route::middleware('auth:api')->group(function () {
         Route::put('/tags/{id}', 'update')->name('api.tags.update');
         Route::get('/tags/{id}', 'show')->name('api.tags.show');
         Route::delete('/tags/{id}', 'destroy')->name('api.tags.destroy');
+    });
+
+    Route::controller(NoteTagsController::class)->group(function () {
+        Route::get('/tags/{tagId}/notes', 'getNotesByTag')->name('api.tags.getNotesByTag');
+        Route::get('/notes/{noteId}/tags', 'getNotesWithTags')->name('api.notes.getNotesWithTags');
+        Route::post('/notes/{noteId}/tags', 'attachTag')->name('api.notes.attachTag');
+        Route::delete('/notes/{noteId]/tags/{$tagId}', 'detachTag')->name('api.notes.detachTag');
+        Route::put('/notes/{noteId}/tags', 'syncTags')->name('api.tags.syncTags');
     });
 });
 
